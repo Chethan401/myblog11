@@ -5,6 +5,7 @@ import com.myblog.myblog11.exception.ResourceNotFoundException;
 import com.myblog.myblog11.payload.PostDto;
 import com.myblog.myblog11.repository.PostRepository;
 import com.myblog.myblog11.service.PostService;
+import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -19,7 +20,12 @@ public class PostServiceImpl implements PostService {
 
     private PostRepository postRepository;
 
-    public PostServiceImpl(PostRepository postRepository) {this.postRepository = postRepository;}
+    private ModelMapper modelMapper;
+
+    public PostServiceImpl(PostRepository postRepository, ModelMapper modelMapper) {
+        this.postRepository = postRepository;
+        this.modelMapper= new ModelMapper();
+    }
 
     @Override
     public PostDto createPost(PostDto postDto) {
@@ -57,20 +63,15 @@ public class PostServiceImpl implements PostService {
         return dtos;
     }
     PostDto mapToDto(Post post){
-        PostDto dto = new PostDto();
-        dto.setId(post.getId());
-        dto.setTitle(post.getTitle());
-        dto.setDescription(post.getDescription());
-        dto.setContent(post.getContent());
-     return  dto;
+        PostDto dto = modelMapper.map(post, PostDto.class);
+
+            return  dto;
     }
 
 
     Post mapToEntity(PostDto postDto){
-        Post post = new Post();
-        post.setTitle(postDto.getTitle());
-        post.setDescription(postDto.getDescription());
-        post.setContent(postDto.getContent());
+       Post post = modelMapper.map(postDto,Post.class);
+
         return post;
     }
 }
