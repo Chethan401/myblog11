@@ -1,5 +1,4 @@
 package com.myblog.myblog11.payload;
-
 import lombok.Data;
 
     @Data
@@ -7,6 +6,3 @@ import lombok.Data;
         private String usernameOrEmail;
         private String password;
     }
-
-
-

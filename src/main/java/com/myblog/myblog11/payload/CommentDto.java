@@ -1,5 +1,4 @@
 package com.myblog.myblog11.payload;
-
 import lombok.Data;
 
 @Data

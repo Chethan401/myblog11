@@ -2,9 +2,7 @@ package com.myblog.myblog11.entity;
 
 import lombok.Getter;
 import lombok.Setter;
-
 import javax.persistence.*;
-
 @Setter
 @Getter
 @Entity
